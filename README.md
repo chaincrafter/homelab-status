@@ -88,7 +88,7 @@ pytest
 
 ## Example dashboard screenshot
 
-Screenshot placeholder: add a dashboard screenshot here after the first UI capture.
+![Dashboard screenshot](templates/example-dashboard.png)
 
 ## MVP scope
 
@@ -115,20 +115,6 @@ Advanced monitoring, authentication, alerting and historical metrics are planned
 - Configurable check intervals
 - Service groups
 - JSON API endpoint
-
-## Portfolio purpose
-
-This project demonstrates practical backend and DevOps skills:
-
-- service health checking
-- configuration-driven application design
-- basic network diagnostics
-- clean Python project structure
-- testable architecture
-- self-hosted tooling
-- local infrastructure monitoring
-
-It is built as a small but realistic portfolio project rather than a production-grade monitoring platform.
 
 ## License
 
