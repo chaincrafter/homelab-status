@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>homelab-status</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #1d2433;
+      --muted: #667085;
+      --line: #d9dee8;
+      --up: #147d4d;
+      --up-bg: #dff7eb;
+      --degraded: #946200;
+      --degraded-bg: #fff2cc;
+      --down: #b42318;
+      --down-bg: #fde2df;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    main {
+      width: min(1100px, calc(100% - 32px));
+      margin: 40px auto;
+    }
+
+    header {
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .panel {
+      overflow-x: auto;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 10px 24px rgba(16, 24, 40, 0.06);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    th,
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .status {
+      display: inline-block;
+      min-width: 86px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .status.up {
+      background: var(--up-bg);
+      color: var(--up);
+    }
+
+    .status.degraded {
+      background: var(--degraded-bg);
+      color: var(--degraded);
+    }
+
+    .status.down {
+      background: var(--down-bg);
+      color: var(--down);
+    }
+
+    .message {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>homelab-status</h1>
+      <p class="subtitle">Local service health checks for your homelab.</p>
+    </header>
+
+    <section class="panel" aria-label="Service status">
+      <table>
+        <thead>
+          <tr>
+            <th>Service name</th>
+            <th>Check type</th>
+            <th>Status</th>
+            <th>Response time</th>
+            <th>Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for result in results %}
+          <tr>
+            <td>{{ result.name }}</td>
+            <td>{{ result.type }}</td>
+            <td><span class="status {{ result.status }}">{{ result.status }}</span></td>
+            <td>{{ "%.2f"|format(result.response_time_ms) }} ms</td>
+            <td class="message">{{ result.message }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

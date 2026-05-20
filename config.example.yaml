@@ -1,0 +1,21 @@
+services:
+  - name: Home Assistant
+    type: http
+    url: http://192.168.30.10:8123
+    timeout: 2
+
+  - name: NAS
+    type: ping
+    host: 192.168.30.20
+    timeout: 2
+
+  - name: Router
+    type: tcp
+    host: 192.168.30.1
+    port: 80
+    timeout: 2
+
+  - name: Ollama
+    type: http
+    url: http://192.168.30.50:11434
+    timeout: 2
